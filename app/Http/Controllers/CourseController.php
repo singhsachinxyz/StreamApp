@@ -13,4 +13,13 @@ class CourseController extends Controller
 
         return view('courses.index', compact('courses'));
     }
+
+    public function show($slug)
+    {
+        $course = Course::where('slug', $slug)
+            ->with('sections.lessons')
+            ->firstOrFail();
+
+        return view('courses.show', compact('course'));
+    }
 }
